@@ -28,7 +28,7 @@ class datagen:
     C_As = 1.95
     t_final = 0.01
     t_step = 1e-4
-    n = 100.0 # int(t_final/t_step)
+    n = 100.0 
     P = np.array([[1060.0, 22.0], [22.0, 0.52]])
     u1_df= pl.DataFrame({"C_A0":np.linspace(-3.5, 3.5, 30, endpoint=True)})
     u2_df = pl.DataFrame({"Q":np.linspace(-5e5, 5e5, 30, endpoint=True)})
@@ -49,10 +49,7 @@ class datagen:
 
     """can parallelize this"""
     def __simulation(self,C_A_init,T_init,C_A0,Q):
-        # C_A_init=C_A_init[0]
-        # T_init=T_init[0]
-        # C_A0=C_A0[0]
-        # Q=Q[0]
+
         T_list = []
         C_A_list=[]
         C_A = C_A_init + self.C_As
@@ -67,9 +64,6 @@ class datagen:
             T += dTdt * self.t_step    
             T_list.append(T)
             C_A_list.append(C_A)
-            # if (i+1)% 10 == 0:
-            #      T_list.append(T-self.T_s)
-            #      C_A_list.append(C_A -self.C_As)
 
             
         T_list = np.array(T_list) - self.T_s
@@ -79,6 +73,7 @@ class datagen:
              
                        
         return [C_A_list,T_list]
+
     
 
 
@@ -98,14 +93,6 @@ class datagen:
 
         return results
 
-    # def testest(self):
-    #     new_DF = []
-    #     for i in range(self.df.shape[0]):
-    #         old_df = self.df[i]
-    #         new_DF.append(self.simulate_row(old_df))
-    #     new_DF = pl.DataFrame({'simulation':new_DF})
-
-    #     return new_DF
 
     def apply_simulation(self):
         
