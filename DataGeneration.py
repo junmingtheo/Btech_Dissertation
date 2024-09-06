@@ -147,16 +147,8 @@ class datagen:
                 self.y_train_norm = y_scaler.transform(self.y_train.reshape(-1,2)).reshape(-1,10,2) 
                 self.X_test_norm = x_scaler.transform(self.X_test.reshape(-1,4)).reshape(-1,10,4)  
                 self.y_test_norm = y_scaler.transform(self.y_test.reshape(-1,2)).reshape(-1,10,2) 
-                # self.X_scaler_mean = x_scaler.mean_
-                # self.y_scaler_mean = y_scaler.mean_
-                # self.X_scaler_std = np.sqrt(x_scaler.var_)
-                # self.y_scaler_std = np.sqrt(y_scaler.var_)
-                
+    
                 Path("standardscaler").mkdir(exist_ok=True)
-                # np.save('standardscaler/xscalermean.pkl',self.X_scaler_mean)
-                # np.save('standardscaler/yscalermean.pkl',self.y_scaler_mean)
-                # np.save('standardscaler/xscalerstd.pkl',self.X_scaler_std)
-                # np.save('standardscaler/yscalerstd.pkl',self.y_scaler_std)
                 joblib.dump(x_scaler, 'standardscaler/xscaler.pkl')
                 joblib.dump(y_scaler, 'standardscaler/yscaler.pkl')
 
